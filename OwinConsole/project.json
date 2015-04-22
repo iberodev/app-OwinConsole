@@ -8,6 +8,6 @@
         "run": "run"
     },
     "frameworks": {
-        "aspnet50": { } //aspnetcore50 is not supported
+        "aspnet50": { } // aspnetcore50 not supported for OWIN
     }
 }

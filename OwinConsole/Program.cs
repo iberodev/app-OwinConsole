@@ -1,4 +1,5 @@
-﻿using Owin;
+﻿using Microsoft.Owin.Hosting;
+using Owin;
 using System;
 
 namespace OwinConsole
@@ -7,13 +8,20 @@ namespace OwinConsole
     {
         public static void Main(string[] args)
         {
-            Console.WriteLine("hello world");
-            Console.ReadLine();
+            string uri = "http://localhost:8080";
+            using (WebApp.Start<Startup>(uri))
+            {
+                Console.WriteLine("Started");
+                Console.ReadKey();
+                Console.WriteLine("Stopping..");
+            }
         }
 
         public class Startup {
             public void Configuration(IAppBuilder app) {
-                //app.Run()
+                app.Run(owincontext => {
+                    return owincontext.Response.WriteAsync("Hello World!");
+                });
             }
         }
     }
