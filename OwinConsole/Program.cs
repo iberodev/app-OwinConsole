@@ -19,9 +19,12 @@ namespace OwinConsole
 
         public class Startup {
             public void Configuration(IAppBuilder app) {
-                app.Run(owincontext => {
-                    return owincontext.Response.WriteAsync("Hello World!");
-                });
+
+                app.UseWelcomePage();
+
+                //app.Run(owincontext => {
+                //    return owincontext.Response.WriteAsync("Hello World!");
+                //});
             }
         }
     }
