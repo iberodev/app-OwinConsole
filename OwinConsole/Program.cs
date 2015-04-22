@@ -1,13 +1,20 @@
-﻿using System;
+﻿using Owin;
+using System;
 
 namespace OwinConsole
 {
     public class Program
     {
-        public void Main(string[] args)
+        public static void Main(string[] args)
         {
-            Console.WriteLine("Hello World");
+            Console.WriteLine("hello world");
             Console.ReadLine();
+        }
+
+        public class Startup {
+            public void Configuration(IAppBuilder app) {
+                //app.Run()
+            }
         }
     }
 }
