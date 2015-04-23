@@ -23,8 +23,19 @@ namespace OwinConsole
 
         public class Startup {
             public void Configuration(IAppBuilder app) {
-                app.Use<HelloWorldComponent>();
+                app.UseHelloWorld();
             }
+        }
+    }
+
+    /// <summary>
+    /// Extension, syntactic sugar to plug in my custom Katana component
+    /// </summary>
+    public static class AppBuilderExtensions
+    {
+        public static void UseHelloWorld(this IAppBuilder app)
+        {
+            app.Use<HelloWorldComponent>();
         }
     }
 
