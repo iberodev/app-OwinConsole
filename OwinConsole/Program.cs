@@ -8,7 +8,7 @@ namespace OwinConsole
     {
         public static void Main(string[] args)
         {
-            string uri = "http://localhost:8080";
+            string uri = "http://localhost:8089";
             using (WebApp.Start<Startup>(uri))
             {
                 Console.WriteLine("Started");
@@ -22,7 +22,8 @@ namespace OwinConsole
 
                 app.UseWelcomePage();
 
-                //app.Run(owincontext => {
+                //app.Run(owincontext =>
+                //{
                 //    return owincontext.Response.WriteAsync("Hello World!");
                 //});
             }
