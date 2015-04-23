@@ -1,14 +1,18 @@
 ﻿using Microsoft.Owin.Hosting;
 using Owin;
 using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace OwinConsole
 {
+    using System.IO;
+    using AppFunc = Func<IDictionary<string, object>, Task>; //Alias the type
     public class Program
     {
         public static void Main(string[] args)
         {
-            string uri = "http://localhost:8089";
+            string uri = "http://localhost:8080";
             using (WebApp.Start<Startup>(uri))
             {
                 Console.WriteLine("Started");
@@ -19,13 +23,24 @@ namespace OwinConsole
 
         public class Startup {
             public void Configuration(IAppBuilder app) {
+                app.Use<HelloWorldComponent>();
+            }
+        }
+    }
 
-                app.UseWelcomePage();
-
-                //app.Run(owincontext =>
-                //{
-                //    return owincontext.Response.WriteAsync("Hello World!");
-                //});
+    public class HelloWorldComponent
+    {
+        private readonly AppFunc _next;
+        public HelloWorldComponent(AppFunc next)
+        {
+            _next = next;
+        }
+        public Task Invoke(IDictionary<string, object> environment)
+        {
+            var response = environment["owin.ResponseBody"] as Stream;
+            using(var writer = new StreamWriter(response))
+            {
+                return writer.WriteAsync("Hello!!");
             }
         }
     }
